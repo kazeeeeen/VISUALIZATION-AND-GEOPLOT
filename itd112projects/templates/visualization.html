@@ -1,0 +1,126 @@
+{% load static %}
+
+{{ '<' }}{{ '!DOCTYPE html>' }}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.cs
+s" integrity="sha384-
+JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+crossorigin="anonymous">
+    <title>Visualization</title>
+    <style>
+        body{
+        background-image:url("{% static 'project1\images\white.jpg'%}")
+        }
+    .exp{
+        position:fixed;
+        top:90px;
+        left:10px;
+        width:690px;
+        height:600px;
+        background-color:#ffc0cb;
+        border-radius:10px;
+        align-items:center;
+        padding:5%;
+        border: 3px solid black;
+        }
+    .main{
+        position:fixed;
+        top:10px;
+        left:725px;
+        width:800px;
+        background-color:#ffc0cb;
+        border-radius:10px;
+        align-items:center;
+        padding:5%;
+        border: 3px solid black;
+        }
+    h3{
+        color: 'white'
+        font-family: cursive;
+        font-family: Lucida Handwriting;
+        font-size:23px;
+        font-weight: bold;
+        }
+    h4{
+        color: 'white'
+        font-family: Copperplate;
+        font-size:18px;
+        font-weight: bold;
+        }
+    back{
+        top: 10px;
+        left: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class = "exp">
+    <h3>Understanding the Dengue Dataset</h3>
+    <br>
+    <h4>About Dengue</h4>
+    <table>
+    Since the 1960s, dengue virus has spread from less than 10 known countries where the disease was endemic and a
+        few thousand cases reported each year to 128 endemic countries, an estimated 400 million
+        infections and 100 million symptomatic cases annually.
+        <br>
+        In the Philippines, dengue is probably the most well-known and feared tropical disease. The first recorded dengue epidemic in Southeast Asia
+        occurred in Manila in 1954, and dengue has since remained endemic.
+        <br>
+        <br>
+        This dataset contains confirmed dengue cases and deaths from the Department of Health-Epidemiology Bureau in the Philippines.
+        <br>
+        <br>
+        The main purpose of this web application is to identify the number of dengue cases and total number of deaths in each province
+        from year 2016-2021.
+
+    </table>
+
+
+<div align ='center' class ="main">
+     <section class="frame-container">
+        <!--* form container startss -->
+
+        <div class="form-container">
+          <form method="post">
+            {% csrf_token %}
+            <label for="lugar">Choose a Location : </label>
+            <select name="lugar" id="lugar">
+              <option disabled selected value>-- Overall --</option>
+              {% for loc in context.locations %}
+              <option value="{{loc}}">{{ loc }}</option>
+              {% endfor %}
+            </select>
+            <button class="submit" type="submit" value="Submit" />Submit</button>
+
+          </form>
+        </div>
+
+        <!--* form container ends -->
+        <!-- * image container starts -->'
+        <div class="figure">{{ context.data|safe }}</div>
+        <div class="figure-details">
+          <h2>{{ context.location }}</h2>
+          <span class="line"></span>
+
+          <p>
+            Total Number of Cases :
+            <span class="result">{{ context.cases }}</span>
+          </p>
+          <p>
+            Total Number of Deaths :
+            <span class="result">{{ context.deaths }}</span>
+          </p>
+        </div>
+        <!-- * image container ends -->'
+      </section>
+</div>
+    </div>
+</body>
+</html>
